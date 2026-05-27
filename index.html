@@ -313,7 +313,7 @@ SHOW
 }
 
 /* =========================
-ONLY ADDED: WHATSAPP FIX
+WHATSAPP FIX
 ========================= */
 
 .whatsapp-widget{
@@ -321,7 +321,6 @@ ONLY ADDED: WHATSAPP FIX
     bottom:20px;
     right:20px;
     z-index:999999;
-
     opacity:0;
     visibility:hidden;
 }
@@ -446,19 +445,23 @@ ONLY ADDED: WHATSAPP FIX
 
 const cards = document.querySelectorAll(".card");
 
-window.addEventListener("scroll",()=>{
+function revealCards(){
     cards.forEach(card=>{
         const top = card.getBoundingClientRect().top;
         if(top < window.innerHeight - 80){
             card.classList.add("show");
         }
     });
-});
+}
 
-/* SHOW WHATSAPP AFTER LOADER ONLY */
+window.addEventListener("scroll", revealCards);
+
+/* FIX: run after loader */
 setTimeout(()=>{
     document.querySelector(".whatsapp-widget").style.opacity = "1";
     document.querySelector(".whatsapp-widget").style.visibility = "visible";
+
+    revealCards();
 }, 4500);
 
 </script>
